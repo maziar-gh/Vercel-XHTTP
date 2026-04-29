@@ -1,7 +1,5 @@
 export const config = { runtime: "edge" };
-
-const TARGET_BASE = (process.env.TARGET_DOMAIN || "").replace(/\/$/, "");
-
+const TARGET_BASE = (process.env.MY_DOMAIN || "").replace(/\/$/, "");
 const STRIP_HEADERS = new Set([
   "host",
   "connection",
@@ -25,8 +23,7 @@ export default async function handler(req) {
 
   try {
     const pathStart = req.url.indexOf("/", 8);
-    const targetUrl =
-      pathStart === -1 ? TARGET_BASE + "/" : TARGET_BASE + req.url.slice(pathStart);
+    const targetUrl = pathStart === -1 ? TARGET_BASE + "/" : TARGET_BASE + req.url.slice(pathStart);
 
     const out = new Headers();
     let clientIp = null;
